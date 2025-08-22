@@ -1,4 +1,5 @@
 
+
 <head>
     <meta charset="UTF-8" />
     <title>健檢流程控制台</title>
@@ -23,7 +24,7 @@
         }
 
         .btn {
-            width: 120px;
+            width: 140px;
             height: 60px;
             font-size: 16px;
             font-weight: bold;
@@ -310,7 +311,7 @@
         }
 
         .basic-checkup-input {
-            width: 120px;
+            width: 100px;
             padding: 8px;
             font-size: 14px;
             border: 1px solid #ccc;
@@ -319,15 +320,13 @@
         }
 
         .basic-checkup-confirm {
-            width: 80px;
-            height: 40px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
+            padding: 8px 15px;
             background: #007bff;
             color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 14px;
         }
 
         .basic-checkup-confirm:hover {
@@ -335,15 +334,13 @@
         }
 
         .basic-checkup-correct {
-            width: 80px;
-            height: 40px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
+            padding: 8px 15px;
             background: #FF8C00;
             color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 14px;
         }
 
         .basic-checkup-correct:hover {
@@ -398,40 +395,30 @@
         }
 
         .input-section button {
-            width: 80px;
-            height: 40px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .input-section .confirm-btn {
+            padding: 8px 20px;
             background: #007bff;
             color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 80px;
+            /* 統一按鈕寬度 */
+            height: 36px;
+            /* 統一按鈕高度 */
+            font-size: 14px;
+            /* 統一字體大小 */
         }
 
-        .input-section .confirm-btn:hover {
+        .input-section button:hover {
             background: #0056b3;
         }
 
         .input-section .correct-btn {
             background: #FF8C00;
-            color: white;
         }
 
         .input-section .correct-btn:hover {
             background: #e07b00;
-        }
-
-        .input-section .ap-btn {
-            background: #FF69B4;
-            color: white;
-        }
-
-        .input-section .ap-btn:hover {
-            background: #FF1493;
         }
 
         .info-display {
@@ -452,7 +439,7 @@
         }
 
         .c13-input {
-            width: 120px;
+            width: 100px;
             padding: 8px;
             font-size: 14px;
             border: 1px solid #ccc;
@@ -461,15 +448,13 @@
         }
 
         .c13-confirm {
-            width: 80px;
-            height: 40px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
+            padding: 8px 15px;
             background: #007bff;
             color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 14px;
         }
 
         .c13-confirm:hover {
@@ -477,38 +462,17 @@
         }
 
         .c13-correct {
-            width: 80px;
-            height: 40px;
-            font-size: 16px;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
+            padding: 8px 15px;
             background: #FF8C00;
             color: white;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
+            font-size: 14px;
         }
 
         .c13-correct:hover {
             background: #e07b00;
-        }
-
-        .special-operations {
-            border: 2px solid #6A5ACD;
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 900px;
-            background: linear-gradient(135deg, #F0F0FF, #F8F8FF);
-            box-shadow: 0 4px 15px rgba(106, 90, 205, 0.2);
-        }
-
-        .special-operations h3 {
-            color: #483D8B;
-            font-size: 18px;
-            text-align: center;
-            border-bottom: 2px solid #6A5ACD;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -521,9 +485,9 @@
             <input type="text" inputmode="numeric" id="barcodeInput" placeholder="輸入條碼號碼">
             <input type="text" inputmode="numeric" id="serialInput" placeholder="輸入流水號">
             <input type="number" id="ageInput" placeholder="輸入年齡" min="0" max="150">
-            <button class="confirm-btn" onclick="confirmInputs()">確定</button>
+            <button onclick="confirmInputs()">確定</button>
             <button class="correct-btn" onclick="correctInputs()">更改</button>
-            <button class="ap-btn" onclick="applyAP()">AP</button>
+            <button onclick="toggleAP()">AP</button>
         </div>
         <div id="infoDisplayPage1" class="info-display"></div>
         <canvas id="barcodePage1" class="barcode-container"></canvas>
@@ -550,12 +514,12 @@
             </div>
         </div>
 
-        <div style="margin-top:20px;">
+        <div id="specialOperations">
             <h3>特殊作業</h3>
             <div class="package-section">
-                <button class="btn" id="specialRadiation" onclick="toggleSpecial(this)">03游離輻射</button>
-                <button class="btn" id="specialLead" onclick="toggleSpecial(this)">05鉛</button>
-                <button class="btn" id="specialHexane" onclick="toggleSpecial(this)">12正己烷</button>
+                <button class="btn" id="spec03" onclick="toggleSpecial('03')">03游離輻射</button>
+                <button class="btn" id="spec05" onclick="toggleSpecial('05')">05鉛</button>
+                <button class="btn" id="spec12" onclick="toggleSpecial('12')">12正己烷</button>
             </div>
         </div>
 
@@ -694,7 +658,6 @@
                 <button class="basic-checkup-confirm" onclick="confirmBasicCheckupInput()">確定</button>
                 <button class="basic-checkup-correct" onclick="correctBasicCheckupInput()">更正</button>
             </div>
-
             <div class="station">
                 <button class="btn" id="weightFat" onclick="markDone(this)">體重體脂</button>
             </div>
@@ -714,6 +677,9 @@
                 <button class="btn" id="bloodPressure" onclick="markDone(this)">血壓</button>
             </div>
             <div class="station">
+                <button class="btn" id="consultation" onclick="markDone(this)">諮詢領管</button>
+            </div>
+            <div class="station">
                 <button class="btn" id="blood" onclick="markDone(this)">抽血</button>
             </div>
             <div class="station">
@@ -728,11 +694,6 @@
             <div class="station">
                 <button class="btn" id="xray" onclick="markDone(this)">X光</button>
             </div>
-        </div>
-
-        <div id="specialOperations" class="special-operations hidden">
-            <h3>🔹 特殊作業</h3>
-            <div id="specialItems"></div>
         </div>
 
         <div class="selected-options">
@@ -760,7 +721,6 @@
     <script>
         let selected = [];
         let selectedButtons = {};
-        let selectedSpecial = [];
         let packageTotals = {
             A: 0,
             B: 0,
@@ -781,7 +741,8 @@
         let inputsLocked = false;
         let c13InputValue = '';
         let c13InputLocked = false;
-        let isAPApplied = false;
+        let specialSelected = [];
+        let isAP = false;
 
         const allowedItems = [
             '頸動脈超音波', '眼底攝影', 'C13', 'HRV', '腹部超音波',
@@ -905,27 +866,6 @@
             }
         }
 
-        function applyAP() {
-            isAPApplied = !isAPApplied; // Toggle AP state
-            const xrayBtn = document.getElementById('xray');
-            if (isAPApplied) {
-                document.body.style.background = '#FFC1E0';
-                if (xrayBtn) {
-                    xrayBtn.classList.remove('done', 'recheck');
-                    xrayBtn.classList.add('rejected');
-                    xrayBtn.textContent = xrayBtn.textContent.replace(' ✅', '').replace(' 🚫', '').replace(' 🔄', '') +
-                        ' 🚫';
-                }
-            } else {
-                document.body.style.background = '#f9f9f9';
-                if (xrayBtn) {
-                    xrayBtn.classList.remove('rejected', 'recheck');
-                    xrayBtn.textContent = xrayBtn.textContent.replace(' ✅', '').replace(' 🚫', '').replace(' 🔄', '');
-                }
-            }
-            updateURL();
-        }
-
         function confirmBasicCheckupInput() {
             const inputValue = document.getElementById('basicCheckupInput').value.trim();
             if (inputValue === '' || isNaN(inputValue) || inputValue < 0) {
@@ -968,18 +908,48 @@
             }
         }
 
+        function toggleSpecial(code) {
+            const btn = document.getElementById(`spec${code}`);
+            if (btn.classList.contains('selected')) {
+                btn.classList.remove('selected');
+                specialSelected = specialSelected.filter(c => c !== code);
+            } else {
+                btn.classList.add('selected');
+                specialSelected.push(code);
+            }
+            updateURL();
+        }
+
+        function toggleAP() {
+            isAP = !isAP;
+            document.body.style.background = isAP ? '#FFC1E0' : '#f9f9f9';
+            const xrayBtn = document.getElementById('xray');
+            if (isAP) {
+                if (xrayBtn) {
+                    xrayBtn.classList.add('rejected');
+                    if (!xrayBtn.textContent.includes('🚫')) xrayBtn.textContent += ' 🚫';
+                }
+            } else {
+                if (xrayBtn) {
+                    xrayBtn.classList.remove('rejected');
+                    xrayBtn.textContent = xrayBtn.textContent.replace(' 🚫', '');
+                }
+            }
+            updateURL();
+        }
+
         function updateURL() {
             const state = {
                 page: currentPage,
                 selected: selected.join(','),
                 selectedButtons: Object.keys(selectedButtons).join(','),
-                selectedSpecial: selectedSpecial.join(','),
                 packages: Object.keys(packageTotals).filter(k => packageTotals[k] > 0).join(','),
                 pkgItems: [],
                 singleItems: [],
                 gift: selectedGift,
                 addons: addonsVisible ? '1' : '0',
                 done: [],
+                rejected: [],
                 recheck: [],
                 barcode: barcodeValue,
                 serial: serialNumber,
@@ -988,59 +958,71 @@
                 inputsLocked: inputsLocked ? '1' : '0',
                 c13Input: c13InputValue,
                 c13InputLocked: c13InputLocked ? '1' : '0',
-                apApplied: isAPApplied ? '1' : '0'
+                special: specialSelected.join(','),
+                ap: isAP ? '1' : '0'
             };
+
+            // Save static buttons (basic checkup)
+            document.querySelectorAll(".basic-checkup .btn").forEach(btn => {
+                if (btn.classList.contains('done')) {
+                    state.done.push(btn.id);
+                } else if (btn.classList.contains('rejected')) {
+                    state.rejected.push(btn.id);
+                } else if (btn.classList.contains('recheck')) {
+                    state.recheck.push(btn.id);
+                }
+            });
+
+            // Save dynamic buttons (selected options, additional items, special operations)
+            document.querySelectorAll("#selectedOptions .btn").forEach(btn => {
+                const id = btn.id;
+                if (btn.classList.contains('done')) {
+                    state.done.push('dynamic-' + id);
+                } else if (btn.classList.contains('rejected')) {
+                    state.rejected.push('dynamic-' + id);
+                } else if (btn.classList.contains('recheck')) {
+                    state.recheck.push('dynamic-' + id);
+                }
+            });
+
+            document.querySelectorAll("#additionalItems .btn").forEach(btn => {
+                const id = btn.id;
+                if (btn.classList.contains('done')) {
+                    state.done.push('dynamic-' + id);
+                } else if (btn.classList.contains('rejected')) {
+                    state.rejected.push('dynamic-' + id);
+                } else if (btn.classList.contains('recheck')) {
+                    state.recheck.push('dynamic-' + id);
+                }
+            });
+
+            document.querySelectorAll(".special-operations .btn").forEach(btn => {
+                const id = btn.id;
+                if (btn.classList.contains('done')) {
+                    state.done.push('dynamic-' + id);
+                } else if (btn.classList.contains('rejected')) {
+                    state.rejected.push('dynamic-' + id);
+                } else if (btn.classList.contains('recheck')) {
+                    state.recheck.push('dynamic-' + id);
+                }
+            });
+
             document.querySelectorAll(".pkg-item.selected").forEach(btn => {
                 state.pkgItems.push(btn.id);
             });
             document.querySelectorAll(".single-item.selected").forEach(btn => {
                 state.singleItems.push(btn.id);
             });
-            document.querySelectorAll(".btn.done").forEach(btn => {
-                state.done.push(btn.id);
-            });
-            document.querySelectorAll(".btn.rejected").forEach(btn => {
-                state.done.push('rejected-' + btn.id);
-            });
-            document.querySelectorAll(".btn.recheck").forEach(btn => {
-                state.recheck.push('recheck-' + btn.id);
-            });
-            if (currentPage === 2) {
-                document.querySelectorAll("#selectedOptions .btn.done").forEach(btn => {
-                    state.done.push('dynamic-' + btn.id);
-                });
-                document.querySelectorAll("#selectedOptions .btn.rejected").forEach(btn => {
-                    state.done.push('rejected-' + btn.id);
-                });
-                document.querySelectorAll("#specialItems .btn.done").forEach(btn => {
-                    state.done.push('dynamic-' + btn.id);
-                });
-                document.querySelectorAll("#specialItems .btn.rejected").forEach(btn => {
-                    state.done.push('rejected-' + btn.id);
-                });
-                document.querySelectorAll("#specialItems .btn.recheck").forEach(btn => {
-                    state.recheck.push('recheck-' + btn.id);
-                });
-                document.querySelectorAll("#additionalItems .btn.done").forEach(btn => {
-                    state.done.push('dynamic-' + btn.id);
-                });
-                document.querySelectorAll("#additionalItems .btn.rejected").forEach(btn => {
-                    state.done.push('rejected-' + btn.id);
-                });
-                document.querySelectorAll("#additionalItems .btn.recheck").forEach(btn => {
-                    state.recheck.push('recheck-' + btn.id);
-                });
-            }
+
             const params = new URLSearchParams();
             Object.keys(state).forEach(key => {
-                if (Array.isArray(state[key])) {
-                    if (state[key].length > 0) {
-                        params.set(key, state[key].join(','));
-                    }
-                } else if (state[key] !== null && state[key] !== '' && state[key] !== 0) {
+                if (Array.isArray(state[key]) && state[key].length > 0) {
+                    params.set(key, state[key].join(','));
+                } else if (state[key] !== null && state[key] !== '' && state[key] !== undefined) {
                     params.set(key, state[key]);
                 }
             });
+
             const newURL = window.location.pathname + '?' + params.toString();
             window.history.replaceState({}, '', newURL);
         }
@@ -1051,14 +1033,6 @@
             const selectedItems = params.get('selected');
             if (selectedItems) {
                 selected = selectedItems.split(',').filter(s => s);
-            }
-            const selectedSpecialItems = params.get('selectedSpecial');
-            if (selectedSpecialItems) {
-                selectedSpecial = selectedSpecialItems.split(',').filter(s => s);
-                selectedSpecial.forEach(item => {
-                    const btn = document.getElementById(item);
-                    if (btn) btn.classList.add('selected');
-                });
             }
             const selectedBtns = params.get('selectedButtons');
             if (selectedBtns) {
@@ -1111,6 +1085,14 @@
                     }
                 });
             }
+            const special = params.get('special');
+            if (special) {
+                specialSelected = special.split(',').filter(c => c);
+                specialSelected.forEach(code => {
+                    const btn = document.getElementById(`spec${code}`);
+                    if (btn) btn.classList.add('selected');
+                });
+            }
             selectedGift = params.get('gift');
             if (selectedGift) {
                 const giftBtn = document.getElementById(selectedGift);
@@ -1127,7 +1109,7 @@
             inputsLocked = params.get('inputsLocked') === '1';
             c13InputValue = params.get('c13Input') || '';
             c13InputLocked = params.get('c13InputLocked') === '1';
-            isAPApplied = params.get('apApplied') === '1';
+            isAP = params.get('ap') === '1';
             if (barcodeValue || serialNumber || age) {
                 document.getElementById('barcodeInput').value = barcodeValue;
                 document.getElementById('serialInput').value = serialNumber;
@@ -1143,94 +1125,56 @@
                 document.getElementById('basicCheckupInput').value = basicCheckupValue;
                 document.getElementById('basicCheckupInput').disabled = true;
             }
-            if (isAPApplied) {
+            if (isAP) {
                 document.body.style.background = '#FFC1E0';
                 const xrayBtn = document.getElementById('xray');
                 if (xrayBtn) {
-                    xrayBtn.classList.remove('done', 'recheck');
                     xrayBtn.classList.add('rejected');
-                    xrayBtn.textContent = xrayBtn.textContent.replace(' ✅', '').replace(' 🚫', '').replace(' 🔄', '') +
-                        ' 🚫';
+                    if (!xrayBtn.textContent.includes('🚫')) xrayBtn.textContent += ' 🚫';
                 }
             }
+
+            // Restore button states
             const doneItems = params.get('done') ? params.get('done').split(',') : [];
+            const rejectedItems = params.get('rejected') ? params.get('rejected').split(',') : [];
             const recheckItems = params.get('recheck') ? params.get('recheck').split(',') : [];
-            if (doneItems) {
-                doneItems.split(',').forEach(btnId => {
-                    if (btnId) {
-                        if (btnId.startsWith('dynamic-')) {
-                            return;
-                        }
-                        if (btnId.startsWith('rejected-')) {
-                            const actualId = btnId.replace('rejected-', '');
-                            const btn = document.getElementById(actualId);
-                            if (btn) {
-                                btn.classList.add('rejected');
-                                if (!btn.textContent.includes('🚫')) btn.textContent += ' 🚫';
-                            }
-                        } else {
-                            const btn = document.getElementById(btnId);
-                            if (btn) {
-                                btn.classList.add('done');
-                                if (!btn.textContent.includes('✅')) btn.textContent += ' ✅';
-                            }
-                        }
-                    }
-                });
-            }
-            if (recheckItems) {
-                recheckItems.split(',').forEach(btnId => {
-                    if (btnId) {
-                        const actualId = btnId.replace('recheck-', '');
-                        const btn = document.getElementById(actualId);
-                        if (btn) {
-                            btn.classList.add('recheck');
-                            btn.textContent = btn.textContent.replace(' ✅', '').replace(' 🚫', '').replace(
-                                ' 🔄', '') + ' 🔄';
-                        }
-                    }
-                });
-            }
+
+            // Restore static buttons (basic checkup)
+            document.querySelectorAll(".basic-checkup .btn").forEach(btn => {
+                if (doneItems.includes(btn.id)) {
+                    btn.classList.add('done');
+                    if (!btn.textContent.includes('✅')) btn.textContent += ' ✅';
+                } else if (rejectedItems.includes(btn.id)) {
+                    btn.classList.add('rejected');
+                    if (!btn.textContent.includes('🚫')) btn.textContent += ' 🚫';
+                } else if (recheckItems.includes(btn.id)) {
+                    btn.classList.add('recheck');
+                    if (!btn.textContent.includes('🔄')) btn.textContent += ' 🔄';
+                }
+            });
+
             if (currentPage === 2) {
                 document.getElementById('page1').classList.add('hidden');
                 document.getElementById('page2').classList.remove('hidden');
                 renderSelectedOptions();
-                if (doneItems) {
-                    setTimeout(() => {
-                        doneItems.split(',').forEach(btnId => {
-                            if (btnId.startsWith('dynamic-')) {
-                                const actualId = btnId.replace('dynamic-', '');
-                                const btn = document.getElementById(actualId);
-                                if (btn) {
-                                    btn.classList.add('done');
-                                    if (!btn.textContent.includes('✅')) btn.textContent += ' ✅';
-                                }
-                            } else if (btnId.startsWith('rejected-')) {
-                                const actualId = btnId.replace('rejected-', '');
-                                const btn = document.getElementById(actualId);
-                                if (btn) {
-                                    btn.classList.add('rejected');
-                                    if (!btn.textContent.includes('🚫')) btn.textContent += ' 🚫';
-                                }
+                // Restore dynamic buttons after rendering
+                setTimeout(() => {
+                    document.querySelectorAll(
+                        "#selectedOptions .btn, #additionalItems .btn, .special-operations .btn").forEach(
+                        btn => {
+                            const dynamicId = 'dynamic-' + btn.id;
+                            if (doneItems.includes(dynamicId)) {
+                                btn.classList.add('done');
+                                if (!btn.textContent.includes('✅')) btn.textContent += ' ✅';
+                            } else if (rejectedItems.includes(dynamicId)) {
+                                btn.classList.add('rejected');
+                                if (!btn.textContent.includes('🚫')) btn.textContent += ' 🚫';
+                            } else if (recheckItems.includes(dynamicId)) {
+                                btn.classList.add('recheck');
+                                if (!btn.textContent.includes('🔄')) btn.textContent += ' 🔄';
                             }
                         });
-                    }, 100);
-                }
-                if (recheckItems) {
-                    setTimeout(() => {
-                        recheckItems.split(',').forEach(btnId => {
-                            if (btnId.startsWith('recheck-')) {
-                                const actualId = btnId.replace('recheck-', '');
-                                const btn = document.getElementById(actualId);
-                                if (btn) {
-                                    btn.classList.add('recheck');
-                                    btn.textContent = btn.textContent.replace(' ✅', '').replace(' 🚫',
-                                        '').replace(' 🔄', '') + ' 🔄';
-                                }
-                            }
-                        });
-                    }, 100);
-                }
+                }, 100);
             }
             updateStatusIndicator();
             updateTotal();
@@ -1421,17 +1365,6 @@
             updateURL();
         }
 
-        function toggleSpecial(btn) {
-            if (btn.classList.contains("selected")) {
-                btn.classList.remove("selected");
-                selectedSpecial = selectedSpecial.filter(x => x !== btn.id);
-            } else {
-                btn.classList.add("selected");
-                selectedSpecial.push(btn.id);
-            }
-            updateURL();
-        }
-
         function toggleAddons() {
             document.getElementById("addons").classList.toggle("hidden");
             addonsVisible = !document.getElementById("addons").classList.contains("hidden");
@@ -1553,13 +1486,6 @@
                         sum += parseInt(btn.dataset.price);
                     }
                 });
-            } else {
-                document.querySelectorAll(".pkg-item.selected").forEach(btn => {
-                    let pkg = btn.dataset.pkg;
-                    if (!document.getElementById("pkg" + pkg).classList.contains("selected")) {
-                        sum += parseInt(btn.dataset.price);
-                    }
-                });
             }
             document.querySelectorAll(".single-item.selected").forEach(btn => {
                 sum += parseInt(btn.dataset.price);
@@ -1587,58 +1513,15 @@
 
         function renderSelectedOptions() {
             let selectedBox = document.getElementById("selectedOptions");
-            let specialBox = document.getElementById("specialItems");
             let additionalBox = document.getElementById("additionalItems");
             selectedBox.innerHTML = "";
-            specialBox.innerHTML = "";
             additionalBox.innerHTML = "";
             const params = new URLSearchParams(window.location.search);
             const doneItems = params.get('done') ? params.get('done').split(',') : [];
+            const rejectedItems = params.get('rejected') ? params.get('rejected').split(',') : [];
             const recheckItems = params.get('recheck') ? params.get('recheck').split(',') : [];
 
-            // Handle special operations
-            let hasSpecialItems = false;
-            const specialItems = [];
-            if (selectedSpecial.includes('specialRadiation')) {
-                hasSpecialItems = true;
-                specialItems.push({
-                    text: '肺功能',
-                    id: 'special-LungFunction'
-                });
-            }
-            if (selectedSpecial.includes('specialLead')) {
-                hasSpecialItems = true;
-                specialItems.push({
-                    text: '血中鉛',
-                    id: 'special-BloodLead'
-                });
-            }
-            // 'specialHexane' does not generate a button
-            specialItems.forEach(item => {
-                let btn = document.createElement("button");
-                btn.className = "btn";
-                btn.textContent = item.text;
-                btn.id = item.id;
-                btn.onclick = function () {
-                    markDone(btn);
-                };
-                const btnIdentifier = item.id;
-                if (doneItems.includes('dynamic-' + btnIdentifier) || doneItems.includes(btnIdentifier)) {
-                    btn.classList.add('done');
-                    if (!btn.textContent.includes('✅')) btn.textContent += ' ✅';
-                } else if (doneItems.includes('rejected-' + btnIdentifier)) {
-                    btn.classList.add('rejected');
-                    if (!btn.textContent.includes('🚫')) btn.textContent += ' 🚫';
-                } else if (recheckItems.includes('recheck-' + btnIdentifier)) {
-                    btn.classList.add('recheck');
-                    if (!btn.textContent.includes('🔄')) btn.textContent += ' 🔄';
-                }
-                specialBox.appendChild(btn);
-            });
-            const specialBlock = document.getElementById('specialOperations');
-            specialBlock.style.display = hasSpecialItems ? 'block' : 'none';
-
-            // Handle public items
+            // Render public-funded items (selected options)
             let ultrasoundItems = [];
             let otherItems = [];
             selected.forEach(name => {
@@ -1654,20 +1537,20 @@
                 btn.onclick = function () {
                     markDone(btn);
                 };
-                if (doneItems.includes('dynamic-' + name) || doneItems.includes(name)) {
+                if (doneItems.includes('dynamic-' + name)) {
                     btn.classList.add('done');
                     if (!btn.textContent.includes('✅')) btn.textContent += ' ✅';
-                } else if (doneItems.includes('rejected-' + name)) {
+                } else if (rejectedItems.includes('dynamic-' + name)) {
                     btn.classList.add('rejected');
                     if (!btn.textContent.includes('🚫')) btn.textContent += ' 🚫';
-                } else if (recheckItems.includes('recheck-' + name)) {
+                } else if (recheckItems.includes('dynamic-' + name)) {
                     btn.classList.add('recheck');
                     if (!btn.textContent.includes('🔄')) btn.textContent += ' 🔄';
                 }
                 selectedBox.appendChild(btn);
             });
 
-            // Handle additional items
+            // Render additional items
             let hasAdditionalItems = false;
             let hasC13 = false;
             let additionalUltrasoundItems = [];
@@ -1734,8 +1617,9 @@
                     }
                 }
             }
-            if (document.getElementById('giftIGE').classList.contains('auto-selected')) {
-                const igeText = document.getElementById('giftIGE').textContent;
+            const igeGift = document.getElementById('giftIGE');
+            if (igeGift.classList.contains('auto-selected')) {
+                const igeText = igeGift.textContent;
                 if (isAllowedItem(igeText)) {
                     hasAdditionalItems = true;
                     const igeName = extractItemName(igeText);
@@ -1765,13 +1649,13 @@
                     markDone(btn);
                 };
                 const btnIdentifier = item.id || (item.pkg + "-" + item.text);
-                if (doneItems.includes('dynamic-' + btnIdentifier) || doneItems.includes(btnIdentifier)) {
+                if (doneItems.includes('dynamic-' + btnIdentifier)) {
                     btn.classList.add('done');
                     if (!btn.textContent.includes('✅')) btn.textContent += ' ✅';
-                } else if (doneItems.includes('rejected-' + btnIdentifier)) {
+                } else if (rejectedItems.includes('dynamic-' + btnIdentifier)) {
                     btn.classList.add('rejected');
                     if (!btn.textContent.includes('🚫')) btn.textContent += ' 🚫';
-                } else if (recheckItems.includes('recheck-' + btnIdentifier)) {
+                } else if (recheckItems.includes('dynamic-' + btnIdentifier)) {
                     btn.classList.add('recheck');
                     if (!btn.textContent.includes('🔄')) btn.textContent += ' 🔄';
                 }
@@ -1782,6 +1666,50 @@
                 additionalBlock.style.display = 'none';
             } else {
                 additionalBlock.style.display = 'block';
+            }
+
+            // Render special operations
+            let existingSpecial = document.querySelector('.special-operations');
+            if (existingSpecial) {
+                existingSpecial.remove();
+            }
+            if (specialSelected.length > 0) {
+                let specialDiv = document.createElement('div');
+                specialDiv.className = 'selected-options special-operations';
+                specialDiv.innerHTML = '<h3>🔹 特殊作業</h3>';
+                let specialBtnsDiv = document.createElement('div');
+                specialSelected.forEach(code => {
+                    let generated = [];
+                    if (code === '03') {
+                        generated = ['肺功能'];
+                    } else if (code === '05') {
+                        generated = ['血中鉛'];
+                    } else if (code === '12') {
+                        generated = [];
+                    }
+                    generated.forEach(name => {
+                        let btn = document.createElement('button');
+                        btn.className = 'btn';
+                        btn.textContent = name;
+                        btn.id = `special-${code}-${name}`;
+                        btn.onclick = () => markDone(btn);
+                        const identifier = `special-${code}-${name}`;
+                        if (doneItems.includes('dynamic-' + identifier)) {
+                            btn.classList.add('done');
+                            if (!btn.textContent.includes('✅')) btn.textContent += ' ✅';
+                        } else if (rejectedItems.includes('dynamic-' + identifier)) {
+                            btn.classList.add('rejected');
+                            if (!btn.textContent.includes('🚫')) btn.textContent += ' 🚫';
+                        } else if (recheckItems.includes('dynamic-' + identifier)) {
+                            btn.classList.add('recheck');
+                            if (!btn.textContent.includes('🔄')) btn.textContent += ' 🔄';
+                        }
+                        specialBtnsDiv.appendChild(btn);
+                    });
+                });
+                specialDiv.appendChild(specialBtnsDiv);
+                const selectedOptionsDiv = document.querySelector('.selected-options');
+                selectedOptionsDiv.parentNode.insertBefore(specialDiv, selectedOptionsDiv);
             }
         }
 
@@ -1799,6 +1727,10 @@
             let input = prompt("請由操作人員輸入");
             if (!input) return;
             input = input.toLowerCase();
+            const isDynamic = button.closest('#selectedOptions') || button.closest('#additionalItems') || button.closest(
+                '.special-operations');
+            const buttonId = isDynamic ? 'dynamic-' + button.id : button.id;
+
             if (input === "v") {
                 button.classList.remove("rejected", "recheck");
                 button.classList.add("done");
@@ -1806,8 +1738,7 @@
             } else if (input === "x") {
                 button.classList.remove("done", "rejected", "recheck");
                 button.textContent = button.textContent.replace(" ✅", "").replace(" 🚫", "").replace(" 🔄", "");
-            } else if (input === "g" && (button.closest('.basic-checkup') || button.closest('#selectedOptions') ||
-                    button.closest('#specialOperations'))) {
+            } else if (input === "g" && (button.closest('.basic-checkup') || button.closest('#selectedOptions'))) {
                 button.classList.remove("done", "recheck");
                 button.classList.add("rejected");
                 button.textContent = button.textContent.replace(" ✅", "").replace(" 🚫", "").replace(" 🔄", "") + " 🚫";
