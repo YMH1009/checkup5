@@ -319,8 +319,8 @@
         }
 
         .basic-checkup-confirm {
-            width: 60px;
-            height: 35px;
+            width: 80px;
+            height: 40px;
             font-size: 16px;
             font-weight: bold;
             border: none;
@@ -335,8 +335,8 @@
         }
 
         .basic-checkup-correct {
-            width: 60px;
-            height: 35px;
+            width: 80px;
+            height: 40px;
             font-size: 16px;
             font-weight: bold;
             border: none;
@@ -398,8 +398,8 @@
         }
 
         .input-section button {
-            width: 60px;
-            height: 35px;
+            width: 80px;
+            height: 40px;
             font-size: 16px;
             font-weight: bold;
             border: none;
@@ -461,8 +461,8 @@
         }
 
         .c13-confirm {
-            width: 60px;
-            height: 35px;
+            width: 80px;
+            height: 40px;
             font-size: 16px;
             font-weight: bold;
             border: none;
@@ -477,8 +477,8 @@
         }
 
         .c13-correct {
-            width: 60px;
-            height: 35px;
+            width: 80px;
+            height: 40px;
             font-size: 16px;
             font-weight: bold;
             border: none;
