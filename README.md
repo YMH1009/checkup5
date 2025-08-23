@@ -55,6 +55,11 @@
             color: white;
         }
 
+        .ap-btn {
+            background-color: rgb(230, 62, 174) !important;
+            color: white !important;
+        }
+
         .hidden {
             display: none;
         }
@@ -383,6 +388,8 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
+            flex-direction: row;
+            flex-wrap: wrap;
         }
 
         .input-section input {
@@ -487,7 +494,7 @@
             <input type="number" id="ageInput" placeholder="輸入年齡" min="0" max="150">
             <button onclick="confirmInputs()">確定</button>
             <button class="correct-btn" onclick="correctInputs()">更改</button>
-            <button onclick="toggleAP()">AP</button>
+            <button class="btn ap-btn" onclick="toggleAP()">AP</button>
         </div>
         <div id="infoDisplayPage1" class="info-display"></div>
         <canvas id="barcodePage1" class="barcode-container"></canvas>
@@ -1742,7 +1749,7 @@
                 button.classList.remove("done", "recheck");
                 button.classList.add("rejected");
                 button.textContent = button.textContent.replace(" ✅", "").replace(" 🚫", "").replace(" 🔄", "") + " 🚫";
-            } else if (input === "2" && button.id === "bloodPressure") {
+            } else if (input === "2") {
                 button.classList.remove("done", "rejected");
                 button.classList.add("recheck");
                 button.textContent = button.textContent.replace(" ✅", "").replace(" 🚫", "").replace(" 🔄", "") + " 🔄";
