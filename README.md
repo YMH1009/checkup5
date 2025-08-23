@@ -55,11 +55,6 @@
             color: white;
         }
 
-        .ap-btn {
-            background-color: rgb(230, 62, 174) !important;
-            color: white !important;
-        }
-
         .hidden {
             display: none;
         }
@@ -385,15 +380,29 @@
             margin: 20px auto;
             max-width: 600px;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            /* 垂直排列子容器 */
             align-items: center;
-            gap: 10px;
-            flex-direction: row;
-            flex-wrap: wrap;
+            /* 水平居中 */
+            gap: 15px;
+            /* 輸入框組和按鈕組之間的間距 */
         }
 
-        .input-section input {
+        .input-group {
+            display: flex;
+            flex-direction: row;
+            /* 輸入框水平排列 */
+            flex-wrap: wrap;
+            /* 允許窄螢幕換行 */
+            gap: 10px;
+            /* 輸入框之間的間距 */
+            justify-content: center;
+            /* 居中對齊 */
+        }
+
+        .input-group input {
             width: 120px;
+            /* 統一輸入框寬度 */
             padding: 8px;
             font-size: 14px;
             border: 1px solid #ccc;
@@ -401,9 +410,22 @@
             text-align: center;
         }
 
+        .button-group {
+            display: flex;
+            flex-direction: row;
+            /* 按鈕水平排列 */
+            flex-wrap: wrap;
+            /* 允許窄螢幕換行 */
+            gap: 10px;
+            /* 按鈕之間的間距 */
+            justify-content: center;
+            /* 居中對齊 */
+        }
+
         .input-section button {
             padding: 8px 20px;
             background: #007bff;
+            /* 確定按鈕的藍色背景 */
             color: white;
             border: none;
             border-radius: 5px;
@@ -413,15 +435,24 @@
             height: 36px;
             /* 統一按鈕高度 */
             font-size: 14px;
-            /* 統一字體大小 */
-        }
-
-        .input-section button:hover {
-            background: #0056b3;
+            writing-mode: horizontal-tb !important;
+            /* 確保文字水平 */
+            text-orientation: mixed !important;
         }
 
         .input-section .correct-btn {
             background: #FF8C00;
+            /* 更改按鈕的橙色背景 */
+        }
+
+        .input-section .ap-btn {
+            background-color: #FF69B4 !important;
+            /* AP 按鈕的桃色背景 */
+            color: white !important;
+        }
+
+        .input-section button:hover {
+            background: #0056b3;
         }
 
         .input-section .correct-btn:hover {
@@ -489,12 +520,16 @@
 
     <div id="page1">
         <div class="input-section">
-            <input type="text" inputmode="numeric" id="barcodeInput" placeholder="輸入條碼號碼">
-            <input type="text" inputmode="numeric" id="serialInput" placeholder="輸入流水號">
-            <input type="number" id="ageInput" placeholder="輸入年齡" min="0" max="150">
-            <button onclick="confirmInputs()">確定</button>
-            <button class="correct-btn" onclick="correctInputs()">更改</button>
-            <button class="btn ap-btn" onclick="toggleAP()">AP</button>
+            <div class="input-group">
+                <input type="text" inputmode="numeric" id="barcodeInput" placeholder="輸入條碼號碼">
+                <input type="text" inputmode="numeric" id="serialInput" placeholder="輸入流水號">
+                <input type="number" id="ageInput" placeholder="輸入年齡" min="0" max="150">
+            </div>
+            <div class="button-group">
+                <button onclick="confirmInputs()">確定</button>
+                <button class="correct-btn" onclick="correctInputs()">更改</button>
+                <button class="btn ap-btn" onclick="toggleAP()">AP</button>
+            </div>
         </div>
         <div id="infoDisplayPage1" class="info-display"></div>
         <canvas id="barcodePage1" class="barcode-container"></canvas>
@@ -929,14 +964,19 @@
 
         function toggleAP() {
             isAP = !isAP;
-            document.body.style.background = isAP ? '#FFC1E0' : '#f9f9f9';
-            const xrayBtn = document.getElementById('xray');
+            const apButton = document.querySelector('button[onclick="toggleAP()"]');
             if (isAP) {
+                apButton.classList.add('ap-selected');
+                document.body.style.background = '#FFC1E0';
+                const xrayBtn = document.getElementById('xray');
                 if (xrayBtn) {
                     xrayBtn.classList.add('rejected');
                     if (!xrayBtn.textContent.includes('🚫')) xrayBtn.textContent += ' 🚫';
                 }
             } else {
+                apButton.classList.remove('ap-selected');
+                document.body.style.background = '#f9f9f9';
+                const xrayBtn = document.getElementById('xray');
                 if (xrayBtn) {
                     xrayBtn.classList.remove('rejected');
                     xrayBtn.textContent = xrayBtn.textContent.replace(' 🚫', '');
@@ -1802,3 +1842,4 @@
         }
     </script>
 </body>
+
