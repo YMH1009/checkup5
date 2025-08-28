@@ -1,5 +1,4 @@
 
-
 <head>
     <meta charset="UTF-8" />
     <title>健檢流程控制台</title>
@@ -1006,7 +1005,8 @@
                 c13Input: c13InputValue,
                 c13InputLocked: c13InputLocked ? '1' : '0',
                 special: specialSelected.join(','),
-                ap: isAP ? '1' : '0'
+                ap: isAP ? '1' : '0',
+                price: window.totalAmount || 0 // 新增：將總金額添加到 URL 參數
             };
 
             // Save static buttons (basic checkup)
@@ -1537,6 +1537,7 @@
             document.querySelectorAll(".single-item.selected").forEach(btn => {
                 sum += parseInt(btn.dataset.price);
             });
+            window.totalAmount = sum;
             document.getElementById("total").textContent = "總金額: " + sum + " 元" + comboDescription;
             updateGiftAvailability(sum);
         }
@@ -1813,10 +1814,11 @@
             const data = {
                 full_url: window.location.href,
                 barcode: barcodeValue,
-                serial: serialNumber
+                serial: serialNumber,
+                total_amount: window.totalAmount || 0 // 新增：發送總金額，如果未計算則預設0
             };
 
-            fetch('https://your-server.com/upload', {
+            fetch('https://your-server.com/upload', { // 替換成您的實際後端URL
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
